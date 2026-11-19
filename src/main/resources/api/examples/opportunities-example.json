@@ -1,0 +1,4 @@
+[
+  { "id": "006ABC", "name": "Annual Renewal", "stage": "Prospecting", "amount": 50000, "accountId": "001ABC" },
+  { "id": "006DEF", "name": "New Store Rollout", "stage": "Proposal", "amount": 120000, "accountId": "001DEF" }
+]

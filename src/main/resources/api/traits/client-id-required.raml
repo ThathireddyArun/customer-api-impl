@@ -1,0 +1,13 @@
+#%RAML 1.0 Trait
+headers:
+  client_id:
+    type: string
+    required: true
+  client_secret:
+    type: string
+    required: true
+responses:
+  400:
+    description: Missing or invalid request (for example, missing client_id header)
+  401:
+    description: Invalid client_id or client_secret

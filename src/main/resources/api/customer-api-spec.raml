@@ -1,0 +1,94 @@
+#%RAML 1.0
+title: Customer API
+version: v1
+mediaType: application/json
+
+traits:
+  client-id-required: !include traits/client-id-required.raml
+
+types:
+  Account: !include datatypes/Account.raml
+  Contact: !include datatypes/Contact.raml
+  Opportunity: !include datatypes/Opportunity.raml
+  Error: !include datatypes/Error.raml
+
+/accounts:
+  get:
+    is: [client-id-required]
+    description: Get all accounts
+    responses:
+      200:
+        body:
+          type: Account[]
+          example: !include examples/accounts-example.json
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        description: Account Id
+    get:
+      is: [client-id-required]
+      description: Get account by Id
+      responses:
+        200:
+          body:
+            type: Account
+            example: !include examples/account-example.json
+        404:
+          body:
+            type: Error
+            example: !include examples/error-example.json
+
+/contacts:
+  get:
+    is: [client-id-required]
+    description: Get all contacts
+    responses:
+      200:
+        body:
+          type: Contact[]
+          example: !include examples/contacts-example.json
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        description: Contact Id
+    get:
+      is: [client-id-required]
+      description: Get contact by Id
+      responses:
+        200:
+          body:
+            type: Contact
+            example: !include examples/contact-example.json
+        404:
+          body:
+            type: Error
+            example: !include examples/error-example.json
+
+/opportunities:
+  get:
+    is: [client-id-required]
+    description: Get all opportunities
+    responses:
+      200:
+        body:
+          type: Opportunity[]
+          example: !include examples/opportunities-example.json
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        description: Opportunity Id
+    get:
+      is: [client-id-required]
+      description: Get opportunity by Id
+      responses:
+        200:
+          body:
+            type: Opportunity
+            example: !include examples/opportunity-example.json
+        404:
+          body:
+            type: Error
+            example: !include examples/error-example.json

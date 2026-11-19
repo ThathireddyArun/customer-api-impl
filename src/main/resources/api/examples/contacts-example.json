@@ -1,0 +1,4 @@
+[
+  { "id": "003ABC", "firstName": "John", "lastName": "Smith", "email": "john.smith@vibexo.com", "accountId": "001ABC" },
+  { "id": "003DEF", "firstName": "Priya", "lastName": "Rao", "email": "priya.rao@novaretail.com", "accountId": "001DEF" }
+]
