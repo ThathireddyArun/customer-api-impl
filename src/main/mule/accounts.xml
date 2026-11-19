@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+      xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+
+    <!-- GET /accounts -->
+    <flow name="get-all-accounts-flow" doc:id="8d4e58d3-0a79-4c9b-9b16-d4bd74cfe962">
+        <logger level="INFO" doc:name="Log start" message="get-all-accounts-flow: started" />
+
+        <salesforce:query doc:name="Query Accounts" config-ref="Salesforce_Config">
+            <salesforce:salesforce-query>SELECT Id, Name, Industry, Phone FROM Account LIMIT 50</salesforce:salesforce-query>
+        </salesforce:query>
+
+        <ee:transform doc:name="Map to RAML Account">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload map {
+    id: $.Id,
+    name: $.Name,
+    (industry: $.Industry) if ($.Industry != null),
+    (phone: $.Phone) if ($.Phone != null)
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+
+        <logger level="INFO" doc:name="Log end" message="get-all-accounts-flow: completed" />
+    </flow>
+</mule>

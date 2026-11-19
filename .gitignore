@@ -49,3 +49,4 @@ velocity.log
 .classpath
 .project
 *.log
+src/main/resources/config/local.yaml

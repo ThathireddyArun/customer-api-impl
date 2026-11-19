@@ -124,27 +124,7 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\accounts:customer-api-spec-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-[
-  {
-    id: "001ABC",
-    name: "Vibexo Tech",
-    industry: "Technology",
-    phone: "+91-9000000001"
-  }, 
-  {
-    id: "001DEF",
-    name: "Nova Retail",
-    industry: "Retail",
-    phone: "+91-9000000002"
-  }
-] as Array {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Get all accounts" doc:id="38e29180-1010-47eb-90f8-453e2ab6ce72" name="get-all-accounts-flow"/>
     </flow>
     <flow name="get:\contacts:customer-api-spec-config">
         <ee:transform doc:name="Transform Message">
